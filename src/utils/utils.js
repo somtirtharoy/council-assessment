@@ -124,10 +124,8 @@ const gen_section_HTML = (section_data) => {
 const showInfoColumn = (section, row_index) => {
     console.log('Show info section');
     // add information required column only if it does not exist
-
-   const radio_element = document.querySelectorAll('.subject_matter_radio_group_1, .yes');
-    if(radio_element[1].checked) {
-        console.log(document.querySelectorAll('.information_column_header'));
+    const radio_element = document.querySelectorAll(`div.${section}_radio_group_${row_index} > label > input.yes`);
+    if(radio_element[0].checked) {
         // add header row if not added
         if( document.querySelectorAll('.information_column_header').length === 0) {
             var header_row = document.querySelectorAll('.section_header_row')[0];
@@ -141,19 +139,16 @@ const showInfoColumn = (section, row_index) => {
         }
     
         // add text information column to the row
-        console.log('');
-        console.log(document.querySelectorAll('.subject_matter_information_input_1'));
-        console.log(document.querySelectorAll('.subject_matter_information_input_1').length);
-        if( document.querySelectorAll('.subject_matter_information_input_1').length === 0) {
+        if( document.querySelectorAll(`.${section}_information_input_${row_index}`).length === 0) {
             var information_column = `<input type='text' placeholder='Type your information here'/>`;
             var information_input = Object.assign(
                 document.createElement("div"),
                 {
-                    className: 'subject_matter_information_input_1',
+                    className: `${section}_information_input_${row_index}`,
                     innerHTML: information_column
                 });
             // information_input.innerHTML = information_column;
-            var radio_group_parent = document.querySelectorAll('.subject_matter_radio_group_1')[0].parentNode;
+            var radio_group_parent = document.querySelectorAll(`.${section}_radio_group_${row_index}`)[0].parentNode;
             radio_group_parent.parentNode.insertBefore(information_input, radio_group_parent.nextSibling);
         }
     }

@@ -30,7 +30,7 @@ const FormSection = props => {
                         {/* <th>Choose an item</th>  */}
                         <td>
                             <div className="subject_matter_radio_group_1">
-                                <label><input className='yes' type="radio" onClick={showInfoColumn}/>Yes</label>
+                                <label><input className='yes' type="radio" onClick={() => showInfoColumn('subject_matter', 1)}/>Yes</label>
                                 <label><input className='no' type="radio" />No</label>
                             </div>
                         </td>
@@ -40,7 +40,7 @@ const FormSection = props => {
                         {/* <th>Choose an item</th>  */}
                         <td>
                             <div className="subject_matter_radio_group_2">
-                                <label><input className='yes' type="radio" onClick={showInfoColumn}/>Yes</label>
+                                <label><input className='yes' type="radio" onClick={() => showInfoColumn('subject_matter', 2)}/>Yes</label>
                                 <label><input className='no' type="radio" />No</label>
                             </div>
                         </td>
