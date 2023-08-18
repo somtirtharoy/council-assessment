@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTable } from 'react-table';
 import PropTypes from 'prop-types';
-import {gen_section_HTML, section_data} from './utils/utils.js';
+import {gen_section_HTML, section_data, showInfoColumn} from './utils/utils.js';
 
 
 // console.log(gen_section_HTML(section_data));
@@ -15,7 +15,7 @@ const FormSection = props => {
         <div>
             <table>
                 <tbody>
-                    <tr>
+                    <tr className='section_header_row'>
                         <th>Subject matter</th>
                         <th>PO</th>
                         <th>AO</th>
@@ -27,11 +27,23 @@ const FormSection = props => {
                         {/* <th rowspan="6" scope="row">PO2</th> */}
                         <th rowSpan="6">PO2</th>
                         <th>AO2.1</th>
-                        <td><div className="radio"><label><input type="radio" />Yes</label></div><div className="radio"><label><input type="radio" />No</label></div></td>
+                        {/* <th>Choose an item</th>  */}
+                        <td>
+                            <div className="subject_matter_radio_group_1">
+                                <label><input className='yes' type="radio" onClick={showInfoColumn}/>Yes</label>
+                                <label><input className='no' type="radio" />No</label>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <th scope="row">AO2.2</th>
-                        <th>Choose an item</th> 
+                        {/* <th>Choose an item</th>  */}
+                        <td>
+                            <div className="subject_matter_radio_group_2">
+                                <label><input className='yes' type="radio" onClick={showInfoColumn}/>Yes</label>
+                                <label><input className='no' type="radio" />No</label>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <th scope="row">AO2.3</th>

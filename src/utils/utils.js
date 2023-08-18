@@ -1,7 +1,8 @@
 
-
+// NOTE: take this out of here and put in another file
 const section_data = {
     subject_matter: {
+        'title': 'Subject Matter',
         layout: {
             root: ['Erosion protection', 'Restoration and replenishment of beach sand', 'Setbacks', 'Protection of the coastal environment'],
             'Erosion protection': ['PO2', 'PO3'],
@@ -42,44 +43,121 @@ const section_data = {
 };
 
 
-function recursive_gen_section_HTML(node, section_data, section, html_string) {
-    if(node == []){
-        return;
-    }
-    
-    html_string += '<tr>';
-    for(let child of section_data[section]['layout'][node]) {
+// format the html accrding to the format metadata 
+const add_formatted_html = (section_data, section, node) => {
+    if(section_data[section]['format'][node] === null ||
+        section_data[section]['format'][node] === undefined) {
+        html_string = `<th>${node}</th>`;
         
-        if(section_data[section]['format'][child] === null ||
-            section_data[section]['format'][child] === undefined) {
-            html_string += `<th>${child}</th>`;
-            
-        } else {
-            html_string += `<th rowSpan="${section_data[section]['format'][child]['rowspan']}">${child}</th>`;
-        }
-
-        // html_string += `<th rowSpan="${section_data[section]['format'][child]['rowspan']}">${child}</th>`;
-        recursive_gen_section_HTML(child, section_data, section, html_string)
-        html_string += '</tr>' 
-    }
-
+    } else {
+        html_string = `<th rowSpan="${section_data[section]['format'][node]['rowspan']}">${node}</th>`;
+    } 
+    return html_string;
 }
 
+// recursively build html for the section
+const recursive_gen_section_HTML = (node, section_data, section, html_string, height, ) => {
+    console.log(node);
+    console.log(section_data[section]['layout'][node]);
+    console.log(html_string);
+
+    height +=1;
+    // BASE CASE
+    if(section_data[section]['layout'][node].length === 0){
+        console.log("At the end of the path");
+        
+        // add the formatted html
+        html_string = add_formatted_html(section_data, section, node);
+        console.log(html_string);
+        return html_string;
+    }
+    
+    // add the formatted html for current node
+    html_string = '<tr>';
+    html_string += add_formatted_html(section_data, section, node);
+
+    // recursively add html for all children nodes
+    for(let [index, child] of section_data[section]['layout'][node].entries()) {
+        console.log('---------------------');
+        console.log(child);
+        console.log('height ', height);
+        console.log('index ', index);
+        console.log('---------------------');
+        html_string += recursive_gen_section_HTML(child, section_data, section, html_string, height)
+        if(index > 0){
+            console.log('Add a <tr> tag');
+            html_string += '<tr>';
+        }
+    }
+    
+    // add closing </tr> tag here before it returns to previous level
+    if(height > 3){
+        console.log('Add a </tr> tag');
+        html_string += '</tr>';
+    }
+    return html_string;
+}
+
+
+// Global variables
 let section_html = {};
 let html_string = '';
-function gen_section_HTML(section_data) {
+let height = 0;
+
+
+// generate html for all sections
+const gen_section_HTML = (section_data) => {
     for( let section in section_data) {
-        const root = section_data[section]['layout']['root'];
-        html_string += '<table>'
-        for( let child of root) {
-            recursive_gen_section_HTML(child, section_data, section, html_string); 
-        }
+        html_string = '<table>'
+        html_string += recursive_gen_section_HTML('root', section_data, section, html_string, height); 
         html_string += '</table>'
+
+        console.log('*********************');
+        console.log(html_string);
+        console.log('*********************');
         section_html[section] = html_string;
     }
 
     return section_html;
 }
 
-export {gen_section_HTML, section_data}; 
+const showInfoColumn = (section, row_index) => {
+    console.log('Show info section');
+    // add information required column only if it does not exist
+
+   const radio_element = document.querySelectorAll('.subject_matter_radio_group_1, .yes');
+    if(radio_element[1].checked) {
+        console.log(document.querySelectorAll('.information_column_header'));
+        // add header row if not added
+        if( document.querySelectorAll('.information_column_header').length === 0) {
+            var header_row = document.querySelectorAll('.section_header_row')[0];
+            var information_column_header = Object.assign(
+                document.createElement('th'), 
+                {
+                    className: 'information_column_header',
+                    innerHTML: 'Information'
+                }); 
+            header_row.appendChild(information_column_header)
+        }
+    
+        // add text information column to the row
+        console.log('');
+        console.log(document.querySelectorAll('.subject_matter_information_input_1'));
+        console.log(document.querySelectorAll('.subject_matter_information_input_1').length);
+        if( document.querySelectorAll('.subject_matter_information_input_1').length === 0) {
+            var information_column = `<input type='text' placeholder='Type your information here'/>`;
+            var information_input = Object.assign(
+                document.createElement("div"),
+                {
+                    className: 'subject_matter_information_input_1',
+                    innerHTML: information_column
+                });
+            // information_input.innerHTML = information_column;
+            var radio_group_parent = document.querySelectorAll('.subject_matter_radio_group_1')[0].parentNode;
+            radio_group_parent.parentNode.insertBefore(information_input, radio_group_parent.nextSibling);
+        }
+    }
+}
+
+export {gen_section_HTML, showInfoColumn, section_data}; 
 
