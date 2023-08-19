@@ -29,9 +29,17 @@ const FormSection = props => {
                         <th>AO2.1</th>
                         {/* <th>Choose an item</th>  */}
                         <td>
-                            <div className="subject_matter_radio_group_1">
-                                <label><input className='yes' type="radio" onClick={() => showInfoColumn('subject_matter', 1)}/>Yes</label>
-                                <label><input className='no' type="radio" />No</label>
+                            <div className="form-check subject_matter_radio_group_1">
+                                <input className="form-check-input yes" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onClick={() => showInfoColumn('subject_matter', 1)}/>
+                                <label className="form-check-label" htmlFor="flexRadioDefault1">
+                                    Yes
+                                </label>
+                            </div>
+                            <div className="form-check subject_matter_radio_group_1">
+                                <input className="form-check-input no" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+                                <label className="form-check-label" htmlFor="flexRadioDefault1">
+                                    No
+                                </label>
                             </div>
                         </td>
                     </tr>
@@ -39,9 +47,21 @@ const FormSection = props => {
                         <th scope="row">AO2.2</th>
                         {/* <th>Choose an item</th>  */}
                         <td>
-                            <div className="subject_matter_radio_group_2">
+                            {/* <div className="subject_matter_radio_group_2">
                                 <label><input className='yes' type="radio" onClick={() => showInfoColumn('subject_matter', 2)}/>Yes</label>
                                 <label><input className='no' type="radio" />No</label>
+                            </div> */}
+                            <div className="form-check subject_matter_radio_group_2">
+                                <input className="form-check-input yes" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onClick={() => showInfoColumn('subject_matter', 2)}/>
+                                <label className="form-check-label" htmlFor="flexRadioDefault1">
+                                    Yes
+                                </label>
+                            </div>
+                            <div className="form-check subject_matter_radio_group_2">
+                                <input className="form-check-input no" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+                                <label className="form-check-label" htmlFor="flexRadioDefault1">
+                                    No
+                                </label>
                             </div>
                         </td>
                     </tr>

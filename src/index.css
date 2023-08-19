@@ -20,3 +20,13 @@ table {
 th, td {
   border: 1px solid black;
 }
+
+div .information_text_area {
+  height: 70px;
+}
+
+.information_text_area {
+  height: max-content;
+  /* overflow-wrap: break-all; */
+  word-wrap: break-word;      
+}

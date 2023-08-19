@@ -124,7 +124,7 @@ const gen_section_HTML = (section_data) => {
 const showInfoColumn = (section, row_index) => {
     console.log('Show info section');
     // add information required column only if it does not exist
-    const radio_element = document.querySelectorAll(`div.${section}_radio_group_${row_index} > label > input.yes`);
+    const radio_element = document.querySelectorAll(`div.${section}_radio_group_${row_index} > input.yes`);
     if(radio_element[0].checked) {
         // add header row if not added
         if( document.querySelectorAll('.information_column_header').length === 0) {
@@ -140,12 +140,12 @@ const showInfoColumn = (section, row_index) => {
     
         // add text information column to the row
         if( document.querySelectorAll(`.${section}_information_input_${row_index}`).length === 0) {
-            var information_column = `<input type='text' placeholder='Type your information here'/>`;
+            var information_column = `<input type='text' class='information_text_area' placeholder='Type your information here'/>`;
             var information_input = Object.assign(
                 document.createElement("div"),
                 {
-                    className: `${section}_information_input_${row_index}`,
-                    innerHTML: information_column
+                    className: `${section}_information_input_${row_index} information_text_area`,
+                    innerHTML: information_column,
                 });
             // information_input.innerHTML = information_column;
             var radio_group_parent = document.querySelectorAll(`.${section}_radio_group_${row_index}`)[0].parentNode;
