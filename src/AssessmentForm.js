@@ -1,26 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import FormSection from './FormSection';
-import {exportToDoc, exportAssessmentToDoc, exportUsingDocx} from './utils/export';
 
-const AssessmentForm = props => {
+const AssessmentForm = ({sectionContent}) => {
+    const { title, content } = sectionContent;
+    const [isActive, setIsActive] = useState(false);
+
     return (
-        <>
-            {/* <form> */}
-            <div id="container">
-                <p>This is the Assessment Form</p>
-                <div>
-                    <FormSection/>
-                </div>
-                {/* <div>
-                    <FormSection/>
-                </div> */}
+        <div className="accordion">
+            <div 
+                className="accordion-title" 
+                onClick={ () => setIsActive(!isActive)}
+            >
+                <div>{title}</div>
+                <div>{ isActive ? '+' : '-'}</div>
             </div>
-            {/* <input type="submit" value="Submit" onClick={() => exportToDoc('exportContent', 'word_doc')}></input> */}
-            <input type="submit" value="Submit" onClick={() => exportUsingDocx('container')}></input>
-            {/* </form> */}
-        </>
-    );
+            {/* {!isActive && <div className="accordion-content">{content}</div>} */}
+                {!isActive && <div className="accordion-content">
+                <FormSection title={title} content={content}/>
+            </div>}
+        </div>
+      );
 };
 
 AssessmentForm.propTypes = {
