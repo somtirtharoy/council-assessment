@@ -7,11 +7,11 @@
   body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 20px;
-    background: rgb(238, 174, 202);
+    background: rgb(245, 245, 245);
     background: radial-gradient(
       circle,
-      rgba(238, 174, 202, 1) 0%,
-      rgba(199, 233, 148, 1) 100%
+      rgb(200, 200, 200) 0%,
+      rgb(194, 194, 194) 100%
     );
   }
   
@@ -30,11 +30,11 @@
     flex-direction: row;
     justify-content: space-between;
     cursor: pointer;
-    background-color: #21aeca;
+    background-color: #7fb8ed;
   }
   
   .accordion-title:hover {
-    background-color: #3ab4cc;
+    background-color: #5c82c0;
   }
   
   .accordion-title,
@@ -43,7 +43,7 @@
   }
   
   .accordion-content {
-    background-color: #39b9d2;
+    background-color: #cef7ff;
   }
   
   @media screen and (max-width: 700px) {

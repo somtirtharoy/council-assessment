@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import FormSubSection from './FormSubSection';
 
-const FormSection = ({sectionContent}) => {
-    const { title, content } = sectionContent;
+const FormSection = ({sectionContent, handleInputChange}) => {
+    const { title, content} = sectionContent;
     const [isActive, setIsActive] = useState(false);
 
     return (
@@ -15,9 +15,9 @@ const FormSection = ({sectionContent}) => {
                 <div>{title}</div>
                 <div>{ isActive ? '+' : '-'}</div>
             </div>
-            {/* {!isActive && <div className="accordion-content">{content}</div>} */}
-                {!isActive && <div className="accordion-content">
-                <FormSubSection title={title} content={content}/>
+            {!isActive && 
+            <div className="accordion-content">
+                <FormSubSection title={title} content={content} handleInputChange={handleInputChange}/>
             </div>}
         </div>
       );

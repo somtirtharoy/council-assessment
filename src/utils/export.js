@@ -1,111 +1,72 @@
-import { Document, Packer, Paragraph, TextRun} from "docx"
+import { Document, Packer, Paragraph, TextRun, HeadingLevel} from "docx"
 import { saveAs } from "file-saver"
 
-
-
-function exportToDoc(element, filename = ''){
-    var header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML to Word Document with JavaScript</title></head><body>";
-
-    var footer = "</body></html>";
-
-    var html = header+document.getElementById(element).innerHTML+footer;
-
-    var blob = new Blob(['\ufeff', html], {
-        type: 'application/msword'
-    });
-    
-    // Specify link url
-    var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
-    
-    // Specify file name
-    filename = filename?filename+'.docx':'document.docx';
-    
-    // Create download link element
-    var downloadLink = document.createElement("a");
-
-    document.body.appendChild(downloadLink);
-    
-    // if(navigator.msSaveOrOpenBlob ){
-    //     navigator.msSaveOrOpenBlob(blob, filename);
-    // }else{
-    // Create a link to the file
-    downloadLink.href = url;
-    
-    // Setting the file name
-    downloadLink.download = filename;
-    
-    //triggering the function
-    downloadLink.click();
-    // }
-    
-    document.body.removeChild(downloadLink);
+const inputFieldMetadata = {
+  'mixed_used_zone_code_PO16_textarea': {'PO': 'PO16', 'section': 'Mixed used zone code'},
+  'low_impact_industry_zone_code_PO4_textarea': {'PO': 'PO4', 'section': 'Low impact industry zone code'},
 }
 
-const exportAssessmentToDoc = (element, filename) => {
-   console.log("Export in process"); 
-
-   const radio_element = document.querySelectorAll('.subject_matter_radio_group_1, .yes');
-   if(radio_element[1].checked) {
-    // var header_row = document.querySelectorAll('.subject_matter_radio_group_1')[0].parentNode; 
-    // //
-    // var text = document.createTextNode("This is my caption.");
-    // var parentNode = document.querySelectorAll('.subject_matter_radio_group_1')[0].parentNode;
-    // console.log(parentNode);
-    // parentNode.parentNode.insertBefore(text, parentNode.nextSibling);
-    }
-}
-
-
-function saveDocumentToFile(doc, fileName) {
-    // Create new instance of Packer for the docx module
-    const packer = new Packer()
-    // Create a mime type that will associate the new file with Microsoft Word
-    const mimeType =
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-    // Create a Blob containing the Document instance and the mimeType
-    packer.toBlob(doc).then(blob => {
-        const docblob = blob.slice(0, blob.size, mimeType)
-        // Save the file using saveAs from the file-saver package
-        saveAs(docblob, fileName)
-    })
-}
-
-const exportUsingDocx = (element) => {
+const exportFormData = (formInputData) => {
     // Create a new instance of Document for the docx module
-    generate();
-}
+    const text_content = []
+    // create the text content
+    for (var field in formInputData) {
+      if(formInputData[field] !== ''){
+        var request_preamble_template = `Per ${inputFieldMetadata[field]['PO']} of ${inputFieldMetadata[field]['section']} the applicant is requested to submit the following:`;
+        text_content.push(
+          new Paragraph({
+            text: request_preamble_template,
+            heading: HeadingLevel.HEADING_2,
+          })
+        );
 
-function generate() {
+        text_content.push(
+          new Paragraph({
+            text: formInputData[field],
+            heading: HeadingLevel.HEADING_2,
+            style: "wellSpaced",
+          })
+        );
+      } 
+    }
+   console.log(text_content) 
+
+    // create doc object
     const doc = new Document({
+      styles: {
+        paragraphStyles: [
+          {
+            id: "wellSpaced",
+            name: "Well Spaced",
+            basedOn: "Normal",
+            quickFormat: true,
+            paragraph: {
+              spacing: { line: 276, before: 20 * 72 * 0.1, after: 20 * 72 * 0.05 },
+            },
+          },
+          {
+            id: "ListParagraph",
+            name: "List Paragraph",
+            basedOn: "Normal",
+            quickFormat: true,
+          },
+        ]
+      },
       sections: [
         {
           properties: {},
-          children: [
-            new Paragraph({
-              children: [
-                new TextRun("Hello World"),
-                new TextRun({
-                  text: "Foo Bar",
-                  bold: true
-                }),
-                new TextRun({
-                  text: "\tGithub is the best",
-                  bold: true
-                })
-              ]
-            })
-          ]
+          children: text_content,
         }
       ]
     });
-  
+    
+    // export doc object to word document
     Packer.toBlob(doc).then((blob) => {
       console.log(blob);
       saveAs(blob, "example.docx");
       console.log("Document created successfully");
     });
-  }
-  
 
+}
 
-export {exportToDoc, exportAssessmentToDoc, exportUsingDocx};
+export {exportFormData};

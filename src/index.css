@@ -30,3 +30,13 @@ div .information_text_area {
   /* overflow-wrap: break-all; */
   word-wrap: break-word;      
 }
+
+.submit-button-container {
+  display: flex;  
+  justify-content: center;  
+  /* align-items: center;   */
+}
+
+.submit-button {
+  /* margin: 2rem auto; */
+}

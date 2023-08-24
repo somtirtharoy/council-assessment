@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
-import {exportUsingDocx} from './utils/export';
 import AssessmentInfoForm from './AssessmentInfoForm';
 
 function App() {
