@@ -4,7 +4,7 @@ import FormSubSection from './FormSubSection';
 
 const FormSection = ({sectionContent, handleInputChange}) => {
     const { title, content} = sectionContent;
-    const [isActive, setIsActive] = useState(false);
+    const [isActive, setIsActive] = useState(true);
 
     return (
         <div className="accordion">
@@ -13,9 +13,9 @@ const FormSection = ({sectionContent, handleInputChange}) => {
                 onClick={ () => setIsActive(!isActive)}
             >
                 <div>{title}</div>
-                <div>{ isActive ? '+' : '-'}</div>
+                <div>{ isActive ? '-' : '+'}</div>
             </div>
-            {!isActive && 
+            {isActive && 
             <div className="accordion-content">
                 <FormSubSection title={title} content={content} handleInputChange={handleInputChange}/>
             </div>}

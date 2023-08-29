@@ -4,7 +4,12 @@ import { saveAs } from "file-saver"
 const inputFieldMetadata = {
   'mixed_used_zone_code_PO16_textarea': {'PO': 'PO16', 'section': 'Mixed used zone code'},
   'low_impact_industry_zone_code_PO4_textarea': {'PO': 'PO4', 'section': 'Low impact industry zone code'},
+  'coast_erosion_hazard_overlay_code_PO2_textarea': {'PO': 'PO2', 'section': 'Coast erosion hazard overlay code'},
 }
+
+// NOTE: 
+// https://dev.to/iainfreestone/how-to-create-a-word-document-with-javascript-24oi
+// https://github.com/dolanmiu/docx
 
 const exportFormData = (formInputData) => {
     // Create a new instance of Document for the docx module
