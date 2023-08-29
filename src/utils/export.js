@@ -1,10 +1,12 @@
 import { Document, Packer, Paragraph, TextRun, HeadingLevel} from "docx"
 import { saveAs } from "file-saver"
 
+// NOTE: dynamically change this dictionary so that each time the data changes we dont have to update this
 const inputFieldMetadata = {
   'mixed_used_zone_code_PO16_textarea': {'PO': 'PO16', 'section': 'Mixed used zone code'},
   'low_impact_industry_zone_code_PO4_textarea': {'PO': 'PO4', 'section': 'Low impact industry zone code'},
   'coast_erosion_hazard_overlay_code_PO2_textarea': {'PO': 'PO2', 'section': 'Coast erosion hazard overlay code'},
+  'coast_erosion_hazard_overlay_code_PO4_textarea': {'PO': 'PO4', 'section': 'Coast erosion hazard overlay code'},
 }
 
 // NOTE: 

@@ -2,13 +2,13 @@ import React from 'react'
 
 const AOSection = ({props}) => {
 
-    const {content, sub_section_name_prefix, handleRadioYesClick, handleRadioNoClick} = props;
+    const {info_required, sub_section_name_prefix, handleRadioYesClick, handleRadioNoClick} = props;
 
     return (
     <>
-        <div className='form-section-info-required-container'>
+        <div className='form-section-ao-radio-container'>
             <div className='form-section-po-ao-container'>
-                {content.info_required}
+                {info_required}
             </div>
             <div className='form-section-radio-button-container'>
                 <div className="form-check radio_group">

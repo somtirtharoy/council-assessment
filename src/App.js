@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import AssessmentInfoForm from './AssessmentInfoForm';
+import AssessmentInfoForm from './components/AssessmentInfoForm';
 
 function App() {
   return (
