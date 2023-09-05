@@ -4,7 +4,6 @@ const assessmentData = {
       mixed_use_zone: {
         title: 'Mixed used zone code',
         content: [{
-            // key: ''
             PO: {
                 "name": "PO16",
                 "text": 'PO16 - Filling and excavation (Bermuda Point precinct)\
@@ -51,7 +50,7 @@ const assessmentData = {
                 civil engineering, and constructed to ensure that they are erosion resistant to safe standards.',
             },
             info_required: ['AO 2.1 - Erosion prevention devices, including building footings, \
-            are certified YN by a Registered Professional Engineer of Queensland (RPEQ) specialising \
+            are certified by a Registered Professional Engineer of Queensland (RPEQ) specialising \
             n civil engineering with a suitable specialty.'],
         },
         {
@@ -65,10 +64,10 @@ const assessmentData = {
                 civil engineering, and constructed to ensure that they are erosion resistant to safe standards.',
             },
             info_required: ['AO 2.1 - Erosion prevention devices, including building footings, \
-                are certified YN by a Registered Professional Engineer of Queensland (RPEQ) specialising \
+                are certified by a Registered Professional Engineer of Queensland (RPEQ) specialising \
                 n civil engineering with a suitable specialty.',
                 'AO 2.1 - Erosion prevention devices, including building footings, \
-                are certified YN by a Registered Professional Engineer of Queensland (RPEQ) specialising \
+                are certified by a Registered Professional Engineer of Queensland (RPEQ) specialising \
                 n civil engineering with a suitable specialty.'
                 ],
         },],

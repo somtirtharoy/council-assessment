@@ -5,7 +5,6 @@ import { useState } from 'react';
 
 const POSection = ({props}) => {
     const {title, content, handleInputChange} = props;
-    console.log(content);
 
     const [infoRequired, setInfoRequired] = useState(false);
 
@@ -29,6 +28,10 @@ const POSection = ({props}) => {
         // unset checked attribute for yes radio button
 
     }
+    
+    const getUniqueKey = (content) => {
+        return `${title.toLowerCase().split(' ').join('_')}_${content.PO.name}`
+    }
 
     const sub_section_name_prefix = `${title.toLowerCase().split(' ').join('_')}_${content.PO.name}`;
 
@@ -41,6 +44,7 @@ const POSection = ({props}) => {
             <div className='form-section-info-required-container'> 
                 {content.info_required.map( (info_required) => 
                     <AOSection 
+                        // key={getUniqueKey(content)} 
                         props={{info_required, sub_section_name_prefix, handleRadioYesClick, handleRadioNoClick}} 
                     /> 
                     )

@@ -36,7 +36,6 @@ const exportFormData = (formInputData) => {
         );
       } 
     }
-   console.log(text_content) 
 
     // create doc object
     const doc = new Document({

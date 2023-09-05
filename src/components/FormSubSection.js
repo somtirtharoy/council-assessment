@@ -1,7 +1,4 @@
-import React, { useState } from 'react';
-import { useTable } from 'react-table';
-import PropTypes from 'prop-types';
-import {gen_section_HTML, section_data, showInfoColumn} from '../utils/utils.js';
+import React from 'react';
 import POSection from './POSection.js';
 
 
