@@ -1,6 +1,7 @@
 import React from 'react'
 import AOSection from './AOSection';
 import InformationSection from './InformationSection';
+import {get_sub_section_name_prefix} from '../utils/utils';
 import { useState } from 'react';
 
 const POSection = ({props}) => {
@@ -33,7 +34,7 @@ const POSection = ({props}) => {
         return `${title.toLowerCase().split(' ').join('_')}_${content.PO.name}`
     }
 
-    const sub_section_name_prefix = `${title.toLowerCase().split(' ').join('_')}_${content.PO.name}`;
+    const sub_section_name_prefix = get_sub_section_name_prefix(title, content.PO.name);
 
     return (
     <>
@@ -44,7 +45,7 @@ const POSection = ({props}) => {
             <div className='form-section-info-required-container'> 
                 {content.info_required.map( (info_required) => 
                     <AOSection 
-                        // key={getUniqueKey(content)} 
+                        // ADD THIS: key={getUniqueKey(content)} 
                         props={{info_required, sub_section_name_prefix, handleRadioYesClick, handleRadioNoClick}} 
                     /> 
                     )

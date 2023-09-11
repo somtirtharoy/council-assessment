@@ -3,18 +3,13 @@ import React, { useState } from 'react'
 import FormSection from './FormSection';
 import Navbar from './Navbar';
 import assessmentData from '../data/assessmentData';
+import {create_initial_form_state} from '../utils/utils'
 
 const AssessmentInfoForm = () => {
 
-    // Note: the keys of this dict are derived from the title in the data
-    // NOTE: dynamically change this dictionary so that each time the data changes we dont have to update this
-    const [formInputData, setFormInputData] = useState({
-        'mixed_used_zone_code_PO16_textarea': '',
-        'low_impact_industry_zone_code_PO4_textarea': '',
-        'coast_erosion_hazard_overlay_code_PO2_textarea': '',
-        'coast_erosion_hazard_overlay_code_PO4_textarea': '',
-    });
-
+    const initial_form_state = create_initial_form_state(assessmentData.subject_matter);
+    const [formInputData, setFormInputData] = useState(initial_form_state);
+    
     const handleInputChange = (id) => {
         var element = document.getElementById(id);
 

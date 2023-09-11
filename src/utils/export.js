@@ -1,24 +1,25 @@
 import { Document, Packer, Paragraph, TextRun, HeadingLevel} from "docx"
 import { saveAs } from "file-saver"
+import assessmentData from "../data/assessmentData"
+import { create_input_field_metadata } from "./utils"
 
-// NOTE: dynamically change this dictionary so that each time the data changes we dont have to update this
-const inputFieldMetadata = {
-  'mixed_used_zone_code_PO16_textarea': {'PO': 'PO16', 'section': 'Mixed used zone code'},
-  'low_impact_industry_zone_code_PO4_textarea': {'PO': 'PO4', 'section': 'Low impact industry zone code'},
-  'coast_erosion_hazard_overlay_code_PO2_textarea': {'PO': 'PO2', 'section': 'Coast erosion hazard overlay code'},
-  'coast_erosion_hazard_overlay_code_PO4_textarea': {'PO': 'PO4', 'section': 'Coast erosion hazard overlay code'},
-}
+
 
 // NOTE: 
 // https://dev.to/iainfreestone/how-to-create-a-word-document-with-javascript-24oi
 // https://github.com/dolanmiu/docx
 
 const exportFormData = (formInputData) => {
+    //
+    const inputFieldMetadata = create_input_field_metadata(assessmentData.subject_matter);
+
     // Create a new instance of Document for the docx module
     const text_content = []
     // create the text content
+    let isDataPresent = false;
     for (var field in formInputData) {
       if(formInputData[field] !== ''){
+        isDataPresent = true;
         var request_preamble_template = `Per ${inputFieldMetadata[field]['PO']} of ${inputFieldMetadata[field]['section']} the applicant is requested to submit the following:`;
         text_content.push(
           new Paragraph({
@@ -37,41 +38,49 @@ const exportFormData = (formInputData) => {
       } 
     }
 
-    // create doc object
-    const doc = new Document({
-      styles: {
-        paragraphStyles: [
-          {
-            id: "wellSpaced",
-            name: "Well Spaced",
-            basedOn: "Normal",
-            quickFormat: true,
-            paragraph: {
-              spacing: { line: 276, before: 20 * 72 * 0.1, after: 20 * 72 * 0.05 },
+    if (isDataPresent) {
+      // create doc object
+      const doc = new Document({
+        styles: {
+          paragraphStyles: [
+            {
+              id: "wellSpaced",
+              name: "Well Spaced",
+              basedOn: "Normal",
+              quickFormat: true,
+              paragraph: {
+                spacing: { line: 276, before: 20 * 72 * 0.1, after: 20 * 72 * 0.05 },
+              },
             },
-          },
+            {
+              id: "ListParagraph",
+              name: "List Paragraph",
+              basedOn: "Normal",
+              quickFormat: true,
+            },
+          ]
+        },
+        sections: [
           {
-            id: "ListParagraph",
-            name: "List Paragraph",
-            basedOn: "Normal",
-            quickFormat: true,
-          },
+            properties: {},
+            children: text_content,
+          }
         ]
-      },
-      sections: [
-        {
-          properties: {},
-          children: text_content,
-        }
-      ]
-    });
+      });
+      
+      // export doc object to word document
+      Packer.toBlob(doc).then((blob) => {
+        console.log(blob);
+        saveAs(blob, "example.docx");
+
+        // NOTE: Add a flash banner to inform the user of this!
+        console.log("Document created successfully");
+      });
+    } else {
+        // NOTE: Add a flash banner to inform the user of this!
+        console.log("Form is empty!");
+    }
     
-    // export doc object to word document
-    Packer.toBlob(doc).then((blob) => {
-      console.log(blob);
-      saveAs(blob, "example.docx");
-      console.log("Document created successfully");
-    });
 
 }
 
