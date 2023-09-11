@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const AOSection = ({props}) => {
 
-    const {info_required, sub_section_name_prefix, handleRadioYesClick, handleRadioNoClick} = props;
+    const {info_required, sub_section_name_prefix, yesRadioButton, noRadioButton, handleRadioYesClick, handleRadioNoClick} = props;
+    
 
     return (
     <>
@@ -15,9 +16,11 @@ const AOSection = ({props}) => {
                     <input 
                         className="form-check-input yes" 
                         type="radio" 
+                        value="yes"
+                        checked={yesRadioButton == 'yes'}
                         name={`${sub_section_name_prefix}_radio_yes`}
                         id={`${sub_section_name_prefix}_radio_yes`} 
-                        onClick= {(event) => {handleRadioYesClick(event, `${sub_section_name_prefix}_radio_no`)}}
+                        onChange= {(event) => {handleRadioYesClick(event, `${sub_section_name_prefix}_radio_no`)}}
                     />
                     <label className="form-check-label" htmlFor={`${sub_section_name_prefix}_radio_yes`}>
                         Y
@@ -27,9 +30,11 @@ const AOSection = ({props}) => {
                     <input 
                         className="form-check-input no" 
                         type="radio" 
+                        value="no"
+                        checked={noRadioButton == 'no'}
                         name={`${sub_section_name_prefix}_radio_no`} 
                         id={`${sub_section_name_prefix}_radio_no`} 
-                        onClick= {(event) => {handleRadioNoClick(event)}}
+                        onChange= {(event) => {handleRadioNoClick(event)}}
                     />
                     <label className="form-check-label" htmlFor={`${sub_section_name_prefix}_radio_no`}>
                         N
