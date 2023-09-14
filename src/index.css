@@ -21,9 +21,6 @@ th, td {
   border: 1px solid black;
 }
 
-div .information_text_area {
-  height: 170px;
-}
 
 .information_text_area {
   height: max-content;

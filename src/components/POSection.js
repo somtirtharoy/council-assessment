@@ -8,31 +8,6 @@ const POSection = ({props}) => {
     const {title, content, handleInputChange} = props;
 
     const [infoRequired, setInfoRequired] = useState(false);
-    const [yesRadioButton, setYesRadioButton] = useState('');
-    const [noRadioButton, setNoRadioButton] = useState('');
-
-    const handleRadioYesClick = (event, id) => {
-        
-        setYesRadioButton(event.target.value);
-        if(!infoRequired) {
-            setInfoRequired(true)
-        }
-        
-        // unset checked attribute for no radio button
-        setNoRadioButton("");
-    }
-
-    const handleRadioNoClick = (event, id) => {
-
-        setNoRadioButton(event.target.value);
-
-        if(infoRequired) { 
-            setInfoRequired(false);
-        }
-
-        // unset checked attribute for yes radio button
-        setYesRadioButton("");
-    }
     
     const getUniqueKey = (content) => {
         return `${title.toLowerCase().split(' ').join('_')}_${content.PO.name}`
@@ -50,7 +25,7 @@ const POSection = ({props}) => {
                 {content.info_required.map( (info_required) => 
                     <AOSection 
                         // ADD THIS: key={getUniqueKey(content)} 
-                        props={{info_required, sub_section_name_prefix, yesRadioButton, noRadioButton, handleRadioYesClick, handleRadioNoClick}} 
+                        props={{info_required, sub_section_name_prefix, infoRequired, setInfoRequired}} 
                     /> 
                     )
                 }

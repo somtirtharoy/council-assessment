@@ -22,6 +22,9 @@ const AssessmentInfoForm = () => {
         })
     };
 
+
+    // NOTE: Change the data to get the form section data into an array 
+    // so that it can be mapped thus reducing redundant code
     const mixed_use_zone_data = assessmentData.subject_matter.mixed_use_zone;
     const low_impact_industry_data = assessmentData.subject_matter.low_impact_industry;
     const medium_impact_industry = assessmentData.subject_matter.medium_impact_industry;
