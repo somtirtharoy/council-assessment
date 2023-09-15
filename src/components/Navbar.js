@@ -2,9 +2,9 @@ import React from 'react'
 
 const Navbar = () => {
   return (
-    <div>
+    <div class='nav-container'>
       <nav>
-        <div className='logo'>Assessment Form</div>
+        <div className='logo'>Planner</div>
         <ul className='nav-links'>
             <li>
                 <a>Application Info</a>
