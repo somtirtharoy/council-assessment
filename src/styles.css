@@ -31,6 +31,7 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     text-align: center;
     padding: 1px 0px 1px 0px;
+    border-radius:10px;
   }
 
   .accordion-container {
@@ -38,8 +39,10 @@
   }
 
   .accordion {
+    /* border: 1px solid #b30505; */
     max-width: 1400px;
-    margin: 2rem auto;
+    margin: 1rem auto;
+    
   }
   
   .accordion-title {
@@ -49,6 +52,7 @@
     cursor: pointer;
     background-color: #7fb8ed;
     font-family: Arial, Helvetica, sans-serif;
+    border-radius:10px;
   }
   
   .accordion-title:hover {
@@ -86,14 +90,14 @@
   .form-section-info-required-container {
     /* display: flex; */
     /* border: 1px solid #b30505; */
-    width: 500px;
+    width: 400px;
     text-align: left;
   }
 
   .form-section-po-container {
     /* border: 1px solid #000; */
     margin: 5px;
-    width: 500px;
+    width: 400px;
     text-align: left;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 18px;
@@ -102,6 +106,7 @@
   .form-section-ao-radio-container {
     display: flex;
     /* border: 1px solid #d3d890; */
+    width: 450px;
     margin: 5px; 
     font-size: x-small;
   }
@@ -110,7 +115,7 @@
     display: flex; 
     /* border: 1px solid #000; */
     margin: 10px 35px 10px 10px;
-    width: 400px;
+    width: 450px;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
   }
@@ -132,6 +137,7 @@
     top: 0;
     bottom: 0;
     width: 100%; */
+    width: 350px;
     height: 100%;
   }
 
