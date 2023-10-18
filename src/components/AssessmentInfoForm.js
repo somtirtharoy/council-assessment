@@ -42,11 +42,11 @@ const AssessmentInfoForm = () => {
 
     return (
     <React.Fragment>
-        <div class="app-canvas">
+        <div className="app-canvas">
             <Navbar/> 
-            <div class="form-container">
+            <div className="form-container">
                 <h1>Assessment Form</h1>
-                <div class="accordion-container">
+                <div className="accordion-container">
                     <FormSection sectionContent={mixed_use_zone_data} handleInputChange={handleInputChange}/>
                     <FormSection sectionContent={low_impact_industry_data} handleInputChange={handleInputChange}/>
                     <FormSection sectionContent={medium_impact_industry} handleInputChange={handleInputChange}/>

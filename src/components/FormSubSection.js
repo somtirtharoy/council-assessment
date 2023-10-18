@@ -12,7 +12,7 @@ const FormSubSection = props => {
 
     return (
         <div>
-            {content.map( (po_content) => <POSection key= {getUniqueKey(po_content)} props={{title, content: po_content, handleInputChange}}/>)}
+            {content.map( (po_content) => <POSection  key= {getUniqueKey(po_content)} props={{title, content: po_content, handleInputChange}}/>)}
         </div>
     );
 };

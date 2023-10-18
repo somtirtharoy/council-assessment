@@ -9,8 +9,8 @@ const POSection = ({props}) => {
 
     const [infoRequired, setInfoRequired] = useState(false);
     
-    const getUniqueKey = (content) => {
-        return `${title.toLowerCase().split(' ').join('_')}_${content.PO.name}`
+    const getUniqueKey = (content, index) => {
+        return `${title.toLowerCase().split(' ').join('_')}_${content.PO.name}_${index}`
     }
 
     const sub_section_name_prefix = get_sub_section_name_prefix(title, content.PO.name);
@@ -22,10 +22,10 @@ const POSection = ({props}) => {
                 {content.PO.text}
             </div>
             <div className='form-section-info-required-container'> 
-                {content.info_required.map( (info_required) => 
+                {content.info_required.map( (info_required, index) => 
                     <AOSection 
-                        // ADD THIS: key={getUniqueKey(content)} 
-                        props={{info_required, sub_section_name_prefix, infoRequired, setInfoRequired}} 
+                        key={getUniqueKey(content, index)}
+                        props={{info_required, sub_section_name_prefix, index, infoRequired, setInfoRequired}} 
                     /> 
                     )
                 }
